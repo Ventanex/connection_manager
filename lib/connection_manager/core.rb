@@ -7,14 +7,14 @@ module ConnectionManager
     end
 
     def self.included(base)
-      base.alias_method_chain :arel_table, :check_name
+      base.alias_method :arel_table, :check_name
     end
 
     def self.extended(base)
       class << base
-        self.alias_method_chain :arel_table, :check_name
+        self.alias_method :arel_table, :check_name
       end
     end
   end
 end
-ActiveRecord::Core::ClassMethods.include(ConnectionManager::Core)
+ActiveRecord::Core::ClassMethods.send(:include,ConnectionManager::Core)
