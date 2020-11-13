@@ -59,17 +59,7 @@ module ConnectionManager
       end
     end
 
-    def self.included(base)
-      base.alias_method_chain :establish_connection, :managed_connections
-    end
-
-    def self.extended(base)
-      class << base
-        self.alias_method_chain :establish_connection, :managed_connections
-      end
-    end
-
-    def establish_connection_with_managed_connections(spec = nil)
+    def establish_connection(spec = nil)
       result = establish_connection_without_managed_connections(spec)
       if spec && (spec.is_a?(Symbol) || spec.is_a?(String))
         self.managed_connections[spec.to_sym] = self.name
