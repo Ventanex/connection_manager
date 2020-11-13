@@ -17,4 +17,4 @@ module ConnectionManager
     end
   end
 end
-ActiveRecord::Core::ClassMethods.send(:include,ConnectionManager::Core)
+ActiveRecord::Core::ClassMethods.include(ConnectionManager::Core)
